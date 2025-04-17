@@ -4,10 +4,14 @@
 
 package frc.robot;
 
+import static edu.wpi.first.units.Units.Seconds;
+
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.LEDPattern;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.LEDPattern.GradientType;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -32,18 +36,17 @@ public class Robot extends TimedRobot {
      m_led = new AddressableLED(0);
      m_ledBuffer = new AddressableLEDBuffer(3);
     m_led.setLength(m_ledBuffer.getLength());
-    m_led.setData(m_ledBuffer);
     m_led.start(); //Do not comment these lines out they create the LEDs
     
     /*LEDPattern red = LEDPattern.solid(Color.kGreen);
     red.applyTo(m_ledBuffer);
     m_led.setData(m_ledBuffer);*/
-    
-    LEDPattern gradient = LEDPattern.gradient(LEDPattern.GradientType.kDiscontinuous, Color.kWheat, Color.kPaleVioletRed);
-    gradient.applyTo(m_ledBuffer);
+
+    LEDPattern base = LEDPattern.gradient(GradientType.kDiscontinuous,Color.kRed, Color.kBlue);
+    LEDPattern pattern = base.blink(Seconds.of(1));
+    pattern.applyTo(m_ledBuffer);
     m_led.setData(m_ledBuffer);
   
-
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();

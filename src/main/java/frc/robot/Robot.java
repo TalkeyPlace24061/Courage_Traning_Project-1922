@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import static edu.wpi.first.units.Units.Percent;
 import static edu.wpi.first.units.Units.Seconds;
 
 import edu.wpi.first.wpilibj.AddressableLED;
@@ -33,19 +34,10 @@ public class Robot extends TimedRobot {
    * initialization code.
    */
   public Robot() {
-     m_led = new AddressableLED(0);
-     m_ledBuffer = new AddressableLEDBuffer(3);
-    m_led.setLength(m_ledBuffer.getLength());
-    m_led.start(); //Do not comment these lines out they create the LEDs
-    
-    /*LEDPattern red = LEDPattern.solid(Color.kGreen);
-    red.applyTo(m_ledBuffer);
-    m_led.setData(m_ledBuffer);*/
-
-    LEDPattern base = LEDPattern.gradient(GradientType.kDiscontinuous,Color.kRed, Color.kBlue);
-    LEDPattern pattern = base.blink(Seconds.of(1));
-    pattern.applyTo(m_ledBuffer);
-    m_led.setData(m_ledBuffer);
+    m_led = new AddressableLED(0);
+    m_ledBuffer = new AddressableLEDBuffer(3);
+   m_led.setLength(m_ledBuffer.getLength());
+   m_led.start(); //Do not comment these lines out they create the LEDs
   
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
@@ -75,7 +67,20 @@ public class Robot extends TimedRobot {
   public void disabledInit() {}
 
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+       
+   /*LEDPattern red = LEDPattern.solid(Color.kGreen);
+   red.applyTo(m_ledBuffer);
+   m_led.setData(m_ledBuffer);*/
+
+   LEDPattern base = LEDPattern.gradient(GradientType.kDiscontinuous,Color.kRed, Color.kBlue);
+   LEDPattern pattern = base.blink(Seconds.of(.5), Seconds.of(.5));
+   LEDPattern pattern2 = base.atBrightness(Percent.of(50));
+   pattern.applyTo(m_ledBuffer);
+   pattern2.applyTo(m_ledBuffer);
+   m_led.setData(m_ledBuffer);
+
+  }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override

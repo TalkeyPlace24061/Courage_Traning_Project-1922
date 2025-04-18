@@ -75,9 +75,7 @@ public class Robot extends TimedRobot {
 
    LEDPattern base = LEDPattern.gradient(GradientType.kDiscontinuous,Color.kRed, Color.kBlue);
    LEDPattern pattern = base.blink(Seconds.of(.5), Seconds.of(.5));
-   LEDPattern pattern2 = base.atBrightness(Percent.of(50));
    pattern.applyTo(m_ledBuffer);
-   pattern2.applyTo(m_ledBuffer);
    m_led.setData(m_ledBuffer);
 
   }

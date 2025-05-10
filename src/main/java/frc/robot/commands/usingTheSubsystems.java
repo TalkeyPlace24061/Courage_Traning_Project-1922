@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import static edu.wpi.first.units.Units.Rotation;
+
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -14,6 +16,7 @@ import frc.robot.subsystems.Elastic;
 public class usingTheSubsystems extends Command {
   /** Creates a new SetAngle. */
   ServoMotor m_ServoMotor;
+  
   public usingTheSubsystems(ServoMotor servoMotor) {
     addRequirements(servoMotor);
     // Use addRequirements() here to declare subsystem dependencies.
@@ -22,20 +25,18 @@ public class usingTheSubsystems extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    SmartDashboard.putNumber("Number",10);
+  }
+
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    try {
       m_ServoMotor.setAngle();
-    } catch (InterruptedException e) {
-      // Auto-generated catch block
-      e.printStackTrace();
-    }
-    Elastic.Notification notification = new Elastic.Notification(Elastic.Notification.NotificationLevel.ERROR, "Error Notification", "This is an example error notification.");
-  Elastic.sendNotification(notification);  
-  SmartDashboard.putNumber("test", 1);
+   
+
+  
   }
 
   // Called once the command ends or is interrupted.

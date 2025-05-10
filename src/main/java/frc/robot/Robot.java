@@ -28,18 +28,18 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private final RobotContainer m_robotContainer;
-  private  AddressableLED  m_led;
-  private  AddressableLEDBuffer m_ledBuffer;
+ /*  private  AddressableLED  m_led;
+  private  AddressableLEDBuffer m_ledBuffer;*/
 
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
   public Robot() {
-    m_led = new AddressableLED(0);
+   /*m_led = new AddressableLED(0);
     m_ledBuffer = new AddressableLEDBuffer(3);
    m_led.setLength(m_ledBuffer.getLength());
-   m_led.start(); //Do not comment these lines out they create the LEDs
+   m_led.start(); //Do not comment these lines out they create the LEDs*/
   
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
@@ -75,10 +75,10 @@ public class Robot extends TimedRobot {
    red.applyTo(m_ledBuffer);
    m_led.setData(m_ledBuffer);*/
 
-   LEDPattern base = LEDPattern.gradient(GradientType.kDiscontinuous,Color.kRed, Color.kBlue);
+  /*LEDPattern base = LEDPattern.gradient(GradientType.kDiscontinuous,Color.kRed, Color.kBlue);
    LEDPattern pattern = base.blink(Seconds.of(.5), Seconds.of(.5));
    pattern.applyTo(m_ledBuffer);
-   m_led.setData(m_ledBuffer);
+   m_led.setData(m_ledBuffer);*/
 
   }
 

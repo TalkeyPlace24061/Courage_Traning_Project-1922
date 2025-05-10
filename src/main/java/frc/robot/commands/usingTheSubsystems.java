@@ -11,12 +11,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ServoMotor;
 import frc.robot.subsystems.Elastic;
+import frc.robot.subsystems.LED;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class usingTheSubsystems extends Command {
   /** Creates a new SetAngle. */
   ServoMotor m_ServoMotor;
-  
+  LED m_LED;
   public usingTheSubsystems(ServoMotor servoMotor) {
     addRequirements(servoMotor);
     // Use addRequirements() here to declare subsystem dependencies.
@@ -34,7 +35,7 @@ public class usingTheSubsystems extends Command {
   @Override
   public void execute() {
       m_ServoMotor.setAngle();
-   
+      m_LED.periodic();
 
   
   }

@@ -24,7 +24,7 @@ public class ServoMotor extends SubsystemBase {
   Elastic.sendNotification(notification);  
  m_angle = SmartDashboard.getNumber("Number",1);
  SmartDashboard.putNumber("test", m_angle);
-  
+
 }
 
 

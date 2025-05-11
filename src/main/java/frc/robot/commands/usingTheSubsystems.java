@@ -18,10 +18,11 @@ public class usingTheSubsystems extends Command {
   /** Creates a new SetAngle. */
   ServoMotor m_ServoMotor;
   LED m_LED;
-  public usingTheSubsystems(ServoMotor servoMotor) {
+  public usingTheSubsystems(ServoMotor servoMotor, LED led) {
     addRequirements(servoMotor);
     // Use addRequirements() here to declare subsystem dependencies.
     m_ServoMotor = servoMotor;
+    m_LED = led;
   }
 
   // Called when the command is initially scheduled.
@@ -36,8 +37,6 @@ public class usingTheSubsystems extends Command {
   public void execute() {
       m_ServoMotor.setAngle();
       m_LED.periodic();
-
-  
   }
 
   // Called once the command ends or is interrupted.

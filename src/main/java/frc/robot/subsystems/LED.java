@@ -21,18 +21,20 @@ import frc.robot.commands.usingTheSubsystems;
 import frc.robot.subsystems.ServoMotor;
 
 public class LED extends SubsystemBase {
-  private  AddressableLED  m_led;
-  private  AddressableLEDBuffer m_ledBuffer;
+  private AddressableLED  m_led;
+  private AddressableLEDBuffer m_ledBuffer;
+  private ServoMotor m_ServoMotor;
 
   /** Creates a new LED. */
-  public LED(usingTheSubsystems usingSubsystems) {
-   ServoMotor m_servo;
-
+  public LED(ServoMotor motor) {
   m_led = new AddressableLED(0);
   m_ledBuffer = new AddressableLEDBuffer(3);
   m_led.setLength(m_ledBuffer.getLength());
   m_led.start(); //Do not comment these lines out they create the LEDs 
-  }
+  m_ServoMotor = motor;
+}
+
+ 
 
   @Override
   public void periodic() {
@@ -47,7 +49,9 @@ public class LED extends SubsystemBase {
    red.applyTo(m_ledBuffer);
    m_led.setData(m_ledBuffer);*/
 
-   LEDPattern.solid(new Color(90,89,70)).applyTo(m_ledBuffer);
+   LEDPattern.solid(new Color(m_ServoMotor.m_angle, .15,.90)).applyTo(m_ledBuffer);
+
+   m_led.setData(m_ledBuffer);
   }
 
 }

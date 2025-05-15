@@ -19,6 +19,8 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.Elastic;
 import frc.robot.subsystems.ServoMotor;
 import frc.robot.subsystems.Elastic.Notification;
+import au.grapplerobotics.CanBridge;
+
 /**
  * The methods in this class are called automatically corresponding to each mode, as described in
  * the TimedRobot documentation. If you change the name of this class or the package after creating
@@ -26,6 +28,8 @@ import frc.robot.subsystems.Elastic.Notification;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
+  
+
 
   private final RobotContainer m_robotContainer;
  /*  private  AddressableLED  m_led;
@@ -40,6 +44,8 @@ public class Robot extends TimedRobot {
     m_ledBuffer = new AddressableLEDBuffer(3);
    m_led.setLength(m_ledBuffer.getLength());
    m_led.start(); //Do not comment these lines out they create the LEDs*/
+
+   CanBridge.runTCP();
   
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.

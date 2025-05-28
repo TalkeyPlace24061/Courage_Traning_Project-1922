@@ -15,8 +15,8 @@ public class Neo extends SubsystemBase {
    /** Creates a new Neo. */
   public Neo() {}
 
-public void moveNeo(double Speed){
-    sparkMax.set(1);
+public void moveNeo(double speed){
+    sparkMax.set(speed);
 }
 
   @Override

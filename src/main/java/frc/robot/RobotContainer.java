@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.ServoMotor;
+import frc.robot.subsystems.TimeOfFlight;
 import frc.robot.commands.usingTheSubsystems;
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -28,7 +29,8 @@ public class RobotContainer {
   private final ServoMotor m_ServoMotor = new ServoMotor();
   private final LED m_LED = new LED(m_ServoMotor);
   private final Neo m_Neo = new Neo();
-  private final usingTheSubsystems m_UsingTheSubsystems = new usingTheSubsystems(m_ServoMotor, m_LED, m_Neo);
+  private final TimeOfFlight m_TOF = new TimeOfFlight();
+  private final usingTheSubsystems m_UsingTheSubsystems = new usingTheSubsystems(m_ServoMotor, m_LED, m_Neo,m_TOF);
   
 
   // Replace with CommandPS4Controller or CommandJoystick if needed

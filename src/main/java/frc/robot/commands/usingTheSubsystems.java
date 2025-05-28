@@ -6,26 +6,33 @@ package frc.robot.commands;
 
 import static edu.wpi.first.units.Units.Rotation;
 
+import edu.wpi.first.wpilibj.LEDPattern;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ServoMotor;
 import frc.robot.subsystems.Elastic;
 import frc.robot.subsystems.LED;
 import frc.robot.subsystems.Neo;
-
+import frc.robot.subsystems.TimeOfFlight;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class usingTheSubsystems extends Command {
-  /** Creates a new SetAngle. */
+
   ServoMotor m_ServoMotor;
   LED m_LED;
   Neo m_Neo;
-  public usingTheSubsystems(ServoMotor servoMotor, LED led, Neo neo) {
+  TimeOfFlight m_TOF;
+    /** Creates a new SetAngle.
+
+   */
+  public usingTheSubsystems(ServoMotor servoMotor, LED led, Neo neo, TimeOfFlight TOF) {
     addRequirements(servoMotor);
     // Use addRequirements() here to declare subsystem dependencies.
     m_ServoMotor = servoMotor;
     m_LED = led;
     m_Neo = neo;
+    m_TOF = TOF;
   }
 
   // Called when the command is initially scheduled.
@@ -39,7 +46,31 @@ public class usingTheSubsystems extends Command {
   @Override
   public void execute() {
       m_ServoMotor.setAngle();
-      m_Neo.moveNeo(1);
+
+      var distance =  m_TOF.Distance();
+      double speed = distance/800;
+      
+      if (distance < 100) {
+        speed = 0.2;
+        m_LED.Colors(Color.kBlue);
+      } else if (distance < 200) {
+        speed = 0.4;
+        m_LED.Colors(Color.kPurple);
+      } else if (distance < 300) {
+        speed = 0.6;
+        m_LED.Colors(Color.kBlue);
+      } else if (distance < 400) {
+        speed = 0.8;
+        m_LED.Colors(Color.kRed);
+      } else {
+        speed = 1;
+        m_LED.Colors(Color.kWhite);
+      }
+      
+      
+      System.out.println("The speed is " + speed);
+      
+      m_Neo.moveNeo(speed);
   }
 
   // Called once the command ends or is interrupted.

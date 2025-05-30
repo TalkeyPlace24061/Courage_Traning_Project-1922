@@ -16,6 +16,7 @@ import frc.robot.subsystems.Elastic;
 import frc.robot.subsystems.LED;
 import frc.robot.subsystems.Neo;
 import frc.robot.subsystems.TimeOfFlight;
+import frc.robot.subsystems.ColorDecector;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class usingTheSubsystems extends Command {
 
@@ -23,16 +24,18 @@ public class usingTheSubsystems extends Command {
   LED m_LED;
   Neo m_Neo;
   TimeOfFlight m_TOF;
+  ColorDecector m_CD;
     /** Creates a new SetAngle.
 
    */
-  public usingTheSubsystems(ServoMotor servoMotor, LED led, Neo neo, TimeOfFlight TOF) {
+  public usingTheSubsystems(ServoMotor servoMotor, LED led, Neo neo, TimeOfFlight TOF, ColorDecector CD) {
     addRequirements(servoMotor);
     // Use addRequirements() here to declare subsystem dependencies.
     m_ServoMotor = servoMotor;
     m_LED = led;
     m_Neo = neo;
     m_TOF = TOF;
+    m_CD = CD;
   }
 
   // Called when the command is initially scheduled.
@@ -51,26 +54,28 @@ public class usingTheSubsystems extends Command {
       double speed = distance/800;
       
       if (distance < 100) {
-        speed = 0.2;
+       //speed = 0.2;
         m_LED.Colors(Color.kBlue);
       } else if (distance < 200) {
-        speed = 0.4;
+        //speed = 0.4;
         m_LED.Colors(Color.kPurple);
       } else if (distance < 300) {
-        speed = 0.6;
-        m_LED.Colors(Color.kBlue);
+        //speed = 0.6;
+        m_LED.Colors(Color.kGreen);
       } else if (distance < 400) {
-        speed = 0.8;
+        //speed = 0.8;
         m_LED.Colors(Color.kRed);
       } else {
-        speed = 1;
+        //speed = 1;
         m_LED.Colors(Color.kWhite);
       }
       
-      
+
       System.out.println("The speed is " + speed);
       
       m_Neo.moveNeo(speed);
+
+      m_CD.Detected();
   }
 
   // Called once the command ends or is interrupted.

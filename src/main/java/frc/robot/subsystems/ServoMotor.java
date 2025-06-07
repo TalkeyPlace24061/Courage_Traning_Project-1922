@@ -28,8 +28,7 @@ public class ServoMotor extends SubsystemBase {
 }
 
 
-  public void 
-  setAngle(){
+  public void setAngle(){
     exampleServo.set(m_angle);
   }
 }

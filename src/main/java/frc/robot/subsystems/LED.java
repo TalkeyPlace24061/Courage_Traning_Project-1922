@@ -9,6 +9,7 @@ import static edu.wpi.first.units.Units.Seconds;
 import java.util.RandomAccess;
 
 import edu.wpi.first.hal.LEDJNI;
+import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -18,6 +19,8 @@ import edu.wpi.first.wpilibj.LEDPattern.GradientType;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.commands.usingTheSubsystems;
+import frc.robot.subsystems.TimeOfFlight;
+import frc.robot.subsystems.Neo;
 import frc.robot.subsystems.ServoMotor;
 
 public class LED extends SubsystemBase {
@@ -25,16 +28,19 @@ public class LED extends SubsystemBase {
   private AddressableLEDBuffer m_ledBuffer;
   private ServoMotor m_ServoMotor;
 
+
   /** Creates a new LED. */
   public LED(ServoMotor motor) {
   m_led = new AddressableLED(0);
   m_ledBuffer = new AddressableLEDBuffer(3);
   m_led.setLength(m_ledBuffer.getLength());
   m_led.start(); //Do not comment these lines out they create the LEDs 
-  m_ServoMotor = motor;
 }
 
- 
+ public void Colors(Color color){
+ LEDPattern pattern = LEDPattern.solid(color);
+ pattern.applyTo(m_ledBuffer);
+}
 
   @Override
   public void periodic() {
@@ -49,7 +55,7 @@ public class LED extends SubsystemBase {
    red.applyTo(m_ledBuffer);
    m_led.setData(m_ledBuffer);*/
 
-   LEDPattern.solid(new Color(m_ServoMotor.m_angle, .15,.90)).applyTo(m_ledBuffer);
+   //LEDPattern.solid(new Color(m_ServoMotor.m_angle, .15,.90)).applyTo(m_ledBuffer);
 
    m_led.setData(m_ledBuffer);
   }

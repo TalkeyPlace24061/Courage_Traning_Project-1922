@@ -9,11 +9,14 @@ import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.LED;
+import frc.robot.subsystems.Neo;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.ServoMotor;
+import frc.robot.subsystems.TimeOfFlight;
+import frc.robot.subsystems.ColorDecector;
 import frc.robot.commands.usingTheSubsystems;
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -26,7 +29,10 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final ServoMotor m_ServoMotor = new ServoMotor();
   private final LED m_LED = new LED(m_ServoMotor);
-  private final usingTheSubsystems m_UsingTheSubsystems = new usingTheSubsystems(m_ServoMotor, m_LED);
+  private final Neo m_Neo = new Neo();
+  private final TimeOfFlight m_TOF = new TimeOfFlight();
+  private final ColorDecector m_CD = new ColorDecector();
+  private final usingTheSubsystems m_UsingTheSubsystems = new usingTheSubsystems(m_ServoMotor, m_LED, m_Neo,m_TOF,m_CD);
   
 
   // Replace with CommandPS4Controller or CommandJoystick if needed

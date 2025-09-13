@@ -50,7 +50,7 @@ public class usingTheSubsystems extends Command {
   public void execute() {
       m_ServoMotor.setAngle();
 
-      var distance =  m_TOF.Distance();
+     /*var distance =  m_TOF.Distance();
       double speed = distance/800;
       
       if (distance < 100) {
@@ -85,6 +85,6 @@ public class usingTheSubsystems extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return false; */
   }
 }

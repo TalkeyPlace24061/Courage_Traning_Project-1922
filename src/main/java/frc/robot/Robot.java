@@ -19,7 +19,9 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.Elastic;
 import frc.robot.subsystems.ServoMotor;
 import frc.robot.subsystems.Elastic.Notification;
+import frc.robot.subsystems.CommandSwerveDrivetrain;
 import au.grapplerobotics.CanBridge;
+import frc.robot.subsystems.LimeLight;
 
 /**
  * The methods in this class are called automatically corresponding to each mode, as described in
@@ -44,6 +46,7 @@ public class Robot extends TimedRobot {
     m_ledBuffer = new AddressableLEDBuffer(3);
    m_led.setLength(m_ledBuffer.getLength());
    m_led.start(); //Do not comment these lines out they create the LEDs*/
+   enableLiveWindowInTest(true);
 
    CanBridge.runTCP();
   

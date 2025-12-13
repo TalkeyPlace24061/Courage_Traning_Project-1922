@@ -4,6 +4,10 @@
 
 package frc.robot.commands;
 
+import com.ctre.phoenix6.swerve.SwerveRequest;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.LimeLight;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
@@ -12,31 +16,53 @@ import frc.robot.subsystems.CommandSwerveDrivetrain;
 public class autoDrive extends Command {
   LimeLight m_Limelight;
   CommandSwerveDrivetrain m_Drivetrain;
+
   /** Creates a new autoDrive. */
   public autoDrive(LimeLight limelight, CommandSwerveDrivetrain drivetrain) {
     // Use addRequirements() here to declare subsystem dependencies.
-   addRequirements(limelight, drivetrain);
+    addRequirements(limelight, drivetrain);
     m_Limelight = limelight;
     m_Drivetrain = drivetrain;
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
+    if (!isFinished()) {
+      m_Drivetrain.Move(getSpeed(), 0, 0);
+    }
+  }
+
+  private double getSpeed() {
+    var Distance = m_Limelight.distToTarget(6);
+    double speed = 0;
+
+    if (Distance > 2) {
+      speed = 1;
+    } else if (Distance > 1.5) {
+      speed = .75;
+    } else if (Distance > 1) {
+      speed = .5;
+    } else if (Distance <= .5) {
+      speed = 0;
+    }
+    return speed;
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_Drivetrain.Stop();
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return  m_Limelight.distToTarget(6) <= 1;
+    return m_Limelight.distToTarget(6) <= 0.4;
   }
 }

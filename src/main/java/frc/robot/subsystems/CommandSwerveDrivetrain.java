@@ -289,4 +289,18 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
     public void Moveforward(){
         
     }
+
+    public void Stop(){
+        applyRequest(()-> new SwerveRequest.FieldCentric()
+            .withVelocityX(0)
+            .withVelocityY(0)
+            .withRotationalRate(0)).execute();
+    }
+
+    public void Move(double velocityX, double velocityY, double rotationalRate){
+        applyRequest(()-> new SwerveRequest.FieldCentric()
+            .withVelocityX(velocityX)
+            .withVelocityY(velocityY)
+            .withRotationalRate(rotationalRate)).execute();
+    }
 }

@@ -4,6 +4,9 @@
 
 package frc.robot.subsystems;
 
+import java.util.Dictionary;
+import java.util.HashMap;
+
 import javax.print.attribute.standard.Fidelity;
 
 import edu.wpi.first.apriltag.AprilTag;
@@ -22,24 +25,26 @@ public class LimeLight extends SubsystemBase {
   double txnc;
   double tync;
   boolean hasTarget;
+
   /** Creates a new LimeLight. */
   public LimeLight() {
-    
-      }
 
+  }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    
-     tx = LimelightHelpers.getTX("limelight-right"); // Horizontal offset from crosshar to target in degrees
-     ty = LimelightHelpers.getTY("limelight-right"); // Vertical offset from crosshair to target in degrees
-     ta = LimelightHelpers.getTA("limelight-right"); // Target area (0% to 100% of image)
-     hasTarget = LimelightHelpers.getTV("limelight-right"); // Do you have a valid target
 
-     txnc = LimelightHelpers.getTXNC("limelight-right"); // Horizontal offset from principal pixel/point to target in degrees 
-     tync = LimelightHelpers.getTYNC("limelight-right"); // Vertical offset from principal pixel/point to target in degrees
-    
+    tx = LimelightHelpers.getTX("limelight-right"); // Horizontal offset from crosshar to target in degrees
+    ty = LimelightHelpers.getTY("limelight-right"); // Vertical offset from crosshair to target in degrees
+    ta = LimelightHelpers.getTA("limelight-right"); // Target area (0% to 100% of image)
+    hasTarget = LimelightHelpers.getTV("limelight-right"); // Do you have a valid target
+
+    txnc = LimelightHelpers.getTXNC("limelight-right"); // Horizontal offset from principal pixel/point to target in
+                                                        // degrees
+    tync = LimelightHelpers.getTYNC("limelight-right"); // Vertical offset from principal pixel/point to target in
+                                                        // degrees
+
     RawFiducial[] fiducials = LimelightHelpers.getRawFiducials("limelight-right");
     for (RawFiducial fiducial : fiducials) {
       int id = fiducial.id;
@@ -52,15 +57,15 @@ public class LimeLight extends SubsystemBase {
       SmartDashboard.putNumber("Distance Meters", distToCamera);
     }
   }
-    
-    public double distToTarget(int target){
-      RawFiducial[] fiducials = LimelightHelpers.getRawFiducials("limelight-right");
-    for (RawFiducial fiducial : fiducials) {      
+
+  public double distToTarget(int target) {
+    RawFiducial[] fiducials = LimelightHelpers.getRawFiducials("limelight-right");
+    for (RawFiducial fiducial : fiducials) {
       int id = fiducial.id;
 
-      if(target == id) {
+      if (target == id) {
         return fiducial.distToCamera;
-      }      
+      }
     }
     return 0;
   }

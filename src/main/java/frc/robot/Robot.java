@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.LEDPattern;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.LEDPattern.GradientType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -47,6 +48,7 @@ public class Robot extends TimedRobot {
    m_led.setLength(m_ledBuffer.getLength());
    m_led.start(); //Do not comment these lines out they create the LEDs*/
    enableLiveWindowInTest(true);
+   SmartDashboard.putData("Scheduler", CommandScheduler.getInstance());
 
    CanBridge.runTCP();
   
@@ -139,3 +141,5 @@ public class Robot extends TimedRobot {
   @Override
   public void simulationPeriodic() {}
 }
+
+
